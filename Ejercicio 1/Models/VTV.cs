@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_1.Models
 {
-    internal class VTV
+    internal class VTV:IComparable
     {
         List<Evaluacion> evaluaciones = new List<Evaluacion>();
 
         public VTV(Propietario propietario, string patente)
         {
             this.propietario = propietario;
+            Patente = patente;
+        }
+
+        public VTV(string patente)
+        {
             Patente = patente;
         }
 
@@ -41,6 +46,16 @@ namespace Ejercicio_1.Models
         public override string ToString()
         {
             return $"Nombre: {propietario.ApellidosNombres}, Patente: {Patente}, Fecha: {Fecha}, Cantidad de Verificaciones: {CantidadVerificaciones}";
+        }
+
+        public int CompareTo(object obj)
+        {
+            VTV actual = obj as VTV;
+            if(actual != null)
+            {
+                return this.Patente.CompareTo(actual.Patente);
+            }
+            return 1;
         }
 
     }
