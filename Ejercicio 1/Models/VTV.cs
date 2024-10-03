@@ -29,7 +29,21 @@ namespace Ejercicio_1.Models
         {
             get { return evaluaciones[idx]; }
         }
-        public TipoAprobacion Aprobacion { get; private set; }
+        public TipoAprobacion Aprobacion
+        {
+            get { int min = 0;
+            for(int i = 0; i < evaluaciones.Count; i++)  //Despues chquear esto
+                {
+                    Evaluacion e = this[i];
+                    int valor = (int)e.Evaluar();
+                    if(i == 0 || valor < min)
+                    {
+                        min = valor;
+                    } 
+                }
+            return (TipoAprobacion)min;
+            }
+        }
         
         public string[] EmitirComprobante()
         {
